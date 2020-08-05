@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+# Building the charm
+#
+# EXAMPLE:
+# set -x
+#
+# Usually ends with building the actual charm
+# $HOME/.local/bin/charmcraft build
