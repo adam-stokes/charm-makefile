@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -x
+
+sudo apt update
+[%- if needs_docker %]
+sudo apt install -qyf docker.io
+[%- endif %]
+[%- if build_type == "charmcraft" %]
+sudo apt install -qyf python3-pip unzip
+pip3 install --user charmcraft
+[%- endif %]
+[%- if build_type == "charmcraft" or build_type == "charm-tools" %]
+sudo snap install charm --classic
+sudo snap install yq
+[%- endif %]

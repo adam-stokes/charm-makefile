@@ -1,1 +1,11 @@
 charm_name: ""
+build_type:
+  help: Choose how the charm gets built
+  choices:
+    - charmcraft
+    - charm-tools
+    - manual
+needs_docker:
+  type: bool
+  help: Does the charm need docker installed?
+  default: yes
