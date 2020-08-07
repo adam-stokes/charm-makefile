@@ -9,3 +9,7 @@ needs_docker:
   type: bool
   help: Does the charm need docker installed?
   default: yes
+has_resources:
+  type: bool
+  help: Does this charm have resources to attach?
+  default: no

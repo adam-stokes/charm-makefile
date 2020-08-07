@@ -12,6 +12,7 @@ if ((RET > 0)); then
     exit 1
 fi
 
+[%- if has_resources %]
 function generate::resource::argument
 {
     py_script="
@@ -26,6 +27,7 @@ print(' '.join(resource_map))
 "
     charm list-resources cs:~"$NAMESPACE"/"$CHARM" --channel unpublished --format json | env python3 -c "$py_script"
 }
+[%- endif %]
 
 
 [%- if build_type == "charmcraft" %]
@@ -38,5 +40,5 @@ unzip ../"$CHARM".charm
 URL=$(charm push "$CHARM_BUILD_DIR"/builds/"$CHARM"/. cs:~"$NAMESPACE"/"$CHARM" | yq r - url)
 
 if [ "$CHANNEL" != unpublished ]; then
-    charm release "$URL" --channel "$CHANNEL" $(generate::resource::argument)
+    charm release "$URL" --channel "$CHANNEL" [% if has_resources %]$(generate::resource::argument)[% endif %]
 fi
