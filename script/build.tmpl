@@ -1,0 +1,14 @@
+#!/bin/bash
+set -x
+
+export PATH=/snap/bin:$PATH
+
+[%- if build_type == "charmcraft" %]
+$HOME/.local/bin/charmcraft build
+[%- endif %]
+
+[%- if build_type == "charm-tools" %]
+: "${CHARM_BUILD_DIR:=/tmp/charms}"
+
+charm build -r --force -o "$CHARM_BUILD_DIR"
+[%- endif %]
